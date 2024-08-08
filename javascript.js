@@ -1,7 +1,7 @@
 let humanScore = 0;
 let computerScore = 0;
 const maxScore = 5;
-
+const div = document.querySelector(".container") 
 
 
 function getComputerChoice(){
@@ -21,42 +21,44 @@ function getComputerChoice(){
 
 function playRound(humanChoice){
     let computerChoice = getComputerChoice();
+    let message = ""
     switch(true){
         case computerChoice == humanChoice:
-            console.log("Draw");
+            message = "Draw";
             break;
             //
         case computerChoice == "Rock" && humanChoice == "Paper":
             humanScore++;
-            console.log("You win! Paper beats Rock");
+            message = "You win! Paper beats Rock";
             break;
             //
         case computerChoice == "Paper" && humanChoice == "Rock":
             computerScore++;
-            console.log("You lose! Paper beats Rock");
+            message = "You lose! Paper beats Rock";
             break;
             //
         case computerChoice == "Rock" && humanChoice == "Scissors":
             computerScore++;
-            console.log("You lose! Rock beats Scissors");
+            message = "You lose! Rock beats Scissors";
             break;
             //
         case computerChoice == "Scissors" && humanChoice == "Rock":
             humanScore++;
-            console.log("You win! Rock beats Scissors");
+            message = "You win! Rock beats Scissors";
             break;
             //
         case computerChoice == "Paper" && humanChoice == "Scissors":
             humanScore++;
-            console.log("You win! Paper beats Scissors");
+            message = "You win! Paper beats Scissors";
             break;
             //
         case computerChoice == "Scissors" && humanChoice == "Paper":
             computerScore++;
-            console.log("You lose! Paper beats Scissors");
+            message = "You lose! Paper beats Scissors";
             break;
     }
-    console.log(`Human score is ${humanScore} and computer score is ${computerScore}`)
+    div.innerHTML = `<p> ${message} </p>` 
+    div.innerHTML = div.innerHTML + `<p> Human score is ${humanScore} and computer score is ${computerScore} </p>`
     if(humanScore == maxScore || computerScore == maxScore){
         endGame();
     }
@@ -65,10 +67,10 @@ function playRound(humanChoice){
 
 function endGame(){
     if(humanScore == maxScore){
-        console.log("Congratulations! You won!");
+        div.innerHTML += "<p> Congratulations! You won! </p>"
     }
     else{
-        console.log("Sorry..you lost :C")
+        div.innerHTML += "<p> Sorry..you lost :C </p>"
     }
 
     const buttons = document.querySelectorAll("button");
@@ -89,3 +91,5 @@ function setGame(){
 
 
 console.log(setGame());
+
+
