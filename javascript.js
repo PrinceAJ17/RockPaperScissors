@@ -1,5 +1,7 @@
 let humanScore = 0;
 let computerScore = 0;
+const maxScore = 5;
+
 
 
 function getComputerChoice(){
@@ -16,13 +18,9 @@ function getComputerChoice(){
     }
 }
 
-function getHumanChoice(){
-    let choice = prompt();
-    return choice.charAt(0).toUpperCase() + choice.slice(1);
-}
 
-function playRound(humanChoice, computerChoice){
-
+function playRound(humanChoice){
+    let computerChoice = getComputerChoice();
     switch(true){
         case computerChoice == humanChoice:
             console.log("Draw");
@@ -57,19 +55,37 @@ function playRound(humanChoice, computerChoice){
             computerScore++;
             console.log("You lose! Paper beats Scissors");
             break;
-
+    }
+    console.log(`Human score is ${humanScore} and computer score is ${computerScore}`)
+    if(humanScore == maxScore || computerScore == maxScore){
+        endGame();
     }
 
 }
 
-function playGame(){
-    for(let i = 0; i<5; i++){
-        let computerChoice = getComputerChoice();
-        let humanChoice = getHumanChoice();
-        playRound(humanChoice, computerChoice);
+function endGame(){
+    if(humanScore == maxScore){
+        console.log("Congratulations! You won!");
     }
-    return `Computer score is ${computerScore} and your score is ${humanScore}`
+    else{
+        console.log("Sorry..you lost :C")
+    }
+
+    const buttons = document.querySelectorAll("button");
+    buttons.forEach((button) => {
+        button.disabled = true;
+    })
 }
 
+function setGame(){
+    const buttons = document.querySelectorAll("button");
+    buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+            humanChoice = button.id;
+            playRound(humanChoice)
+        })
+    }
+)}
 
-console.log(playGame());
+
+console.log(setGame());
